@@ -1,0 +1,606 @@
+import React, { useState, useEffect, useRef } from "react";
+import "./input.css";
+//import "./exp.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import * as icons from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
+import Select from 'react-select'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import LoadingScreen from './Loading';
+import { useLocation } from "react-router-dom";
+const config = require('./Apiconfig');
+
+function NumberSeriesInput({ }) {
+  const [Screen_Type, setScreen_Type] = useState("");
+  const [screentypedrop, setscreentypedrop] = useState([]);
+  const [Start_Year, setStart_Year] = useState("");
+  const [End_Year, setEnd_Year] = useState("");
+  const [Start_No, setStart_No] = useState(1);
+  const [Running_No, setRunning_No] = useState(0);
+  const [End_No, setEnd_No] = useState(10000);
+  const [comtext, secomtext] = useState("");
+  const [selectedscreentype, setselectedscreentype] = useState('');
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [statusdrop, setStatusdrop] = useState([]);
+  const [booleandrop, setBooleandrop] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedStatus, setselectedStatus] = useState('');
+  const [selectedBoolean, setselectedBoolean] = useState('');
+  const [status, setStatus] = useState("");
+  const [number_prefix, setNumber_prefix] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const startyear = useRef(null);
+  const screentype = useRef(null);
+  const endyear = useRef(null);
+  const strtno = useRef(null);
+  const runno = useRef(null);
+  const endno = useRef(null);
+  const text = useRef(null);
+  const Status = useRef(null);
+  const numpre = useRef(null);
+  const [hasValueChanged, setHasValueChanged] = useState(false);
+  const created_by = sessionStorage.getItem('selectedUserCode')
+  const [isUpdated, setIsUpdated] = useState(false);
+  const [isSelectedscreentype, setIsSelectedscreentype] = useState(false);
+  const [isSelectedStatus, setIsSelectStatus] = useState(false);
+  const [isSelectedBoolean, setIsSelectBoolean] = useState(false);
+
+
+
+  console.log(selectedRows);
+  console.log(selectedRows);
+  const modified_by = sessionStorage.getItem("selectedUserCode");
+
+  const location = useLocation();
+  const { mode, selectedRow } = location.state || {};
+
+
+  const clearInputFields = () => {
+    setStart_Year("");
+    setEnd_Year("");
+    setStart_No("");
+    setRunning_No("");
+    setEnd_No("");
+    setScreen_Type("");
+    setStatus(null);
+    setNumber_prefix(null);
+    secomtext("");
+
+  }
+
+  useEffect(() => {
+    if (mode === "update" && selectedRow && !isUpdated) {
+      setStart_Year(selectedRow.Start_Year || "");
+      setEnd_Year(selectedRow.End_Year || "");
+      setStart_No(selectedRow.Start_No || "");
+      setRunning_No(selectedRow.Running_No || "");
+      setEnd_No(selectedRow.End_No || "");
+      secomtext(selectedRow.comtext || "");
+      setScreen_Type(selectedRow.Screen_Type || "");
+      setStatus(selectedRow.Status || "");
+      setNumber_prefix(selectedRow.number_prefix || "");
+
+
+      setselectedscreentype({
+        label: selectedRow.Screen_Type,
+        value: selectedRow.Screen_Type,
+      });
+
+      setselectedStatus({
+        label: selectedRow.Status,
+        value: selectedRow.status,
+      });
+      setStatus(selectedRow.status || '')
+
+      setselectedBoolean({
+        label: selectedRow.number_prefix,
+        value: selectedRow.number_prefix,
+      });
+      setNumber_prefix(selectedRow.number_prefix || '')
+
+
+    } else if (mode === "create") {
+      clearInputFields();
+    }
+  }, [mode, selectedRow, isUpdated]);
+
+
+  const handleUpdate = async () => {
+    if (
+
+      !Start_Year ||
+      !End_Year ||
+      !Start_No ||
+      !Running_No ||
+      !End_No ||
+      !comtext
+
+    ) {
+      setError(" ");
+      toast.warning("Missing Required Fields");
+      return;
+    }
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${config.apiBaseUrl}/NumberSeriesUpdate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+
+          company_code: sessionStorage.getItem('selectedCompanyCode'),
+          Screen_Type: selectedscreentype.value,
+          Start_Year: Start_Year,
+          End_Year: End_Year,
+          Running_No: Running_No,
+          Start_No: Start_No,
+          End_No: End_No,
+          text: comtext,
+          number_prefix: number_prefix,
+          Status: status,
+          modified_by,
+        }),
+      });
+      if (response.ok) {
+        toast.success("Data updated successfully", {
+          onClose: () => clearInputFields()
+        });
+      }
+      else if (response.status === 400) {
+        const errorResponse = await response.json();
+        console.error(errorResponse.message);
+        toast.warning(errorResponse.message);
+      }
+      else {
+        console.error("Failed to insert data");
+        toast.error("Failed to Update data");
+      }
+    } catch (error) {
+      console.error("Error Update data:", error);
+      toast.error('Error inserting data: ' + error.message);
+    }
+    finally {
+      setLoading(false);
+    }
+  };
+
+
+
+  useEffect(() => {
+    const company_code = sessionStorage.getItem('selectedCompanyCode');
+
+    fetch(`${config.apiBaseUrl}/screentype`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ company_code })
+    })
+      .then((data) => data.json())
+      .then((val) => setscreentypedrop(val));
+  }, []);
+
+
+  useEffect(() => {
+    const company_code = sessionStorage.getItem('selectedCompanyCode');
+
+    fetch(`${config.apiBaseUrl}/status`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ company_code })
+    })
+      .then((data) => data.json())
+      .then((val) => setStatusdrop(val))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
+
+  useEffect(() => {
+    const company_code = sessionStorage.getItem('selectedCompanyCode');
+
+    fetch(`${config.apiBaseUrl}/getboolean`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ company_code })
+    })
+      .then((data) => data.json())
+      .then((val) => setBooleandrop(val))
+      .catch((error) => console.error('Error fetching data:', error));
+  }, []);
+
+
+  const filteredOptionscreentype = screentypedrop.map((option) => ({
+    value: option.attributedetails_name,
+    label: option.attributedetails_name,
+  }));
+
+  const filteredOptionStatus = statusdrop.map((option) => ({
+    value: option.attributedetails_name,
+    label: option.attributedetails_name,
+  }));
+
+  const filteredOptionBoolean = booleandrop.map((option) => ({
+    value: option.attributedetails_name,
+    label: option.attributedetails_name,
+  }));
+
+  useEffect(() => {
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = today.getMonth(); // 0-based month, so 0 is January, 1 is February, etc.
+
+    let financialYearStartDate, financialYearEndDate;
+
+    if (currentMonth < 3) {  // If current month is less than April (March)
+      // Set the previous year's start date and the current year's end date
+      financialYearStartDate = `${currentYear - 1}-04-01`;
+      financialYearEndDate = `${currentYear}-03-31`;
+    } else {
+      // Set the current year's start date and the next year's end date
+      financialYearStartDate = `${currentYear}-04-01`;
+      financialYearEndDate = `${currentYear + 1}-03-31`;
+    }
+
+    // Set the calculated dates to the state
+    setStart_Year(financialYearStartDate);
+    setEnd_Year(financialYearEndDate);
+
+  }, []);
+
+
+  const handleChangescreentype = (selectedscreentype) => {
+    setselectedscreentype(selectedscreentype);
+    setScreen_Type(selectedscreentype ? selectedscreentype.value : '');
+
+  };
+
+  const handleChangeStatus = (selectedStatus) => {
+    setselectedStatus(selectedStatus);
+    setStatus(selectedStatus ? selectedStatus.value : '');
+
+  };
+
+  const handleChangeBoolean = (selectedBoolean) => {
+    setselectedBoolean(selectedBoolean);
+    setNumber_prefix(selectedBoolean ? selectedBoolean.value : '');
+
+  };
+
+  const handleInsert = async () => {
+    if (
+      !Screen_Type
+    ) {
+      setError(" ");
+      toast.warning("Missing Required Fields");
+      return;
+    }
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${config.apiBaseUrl}/addNumberseries`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          company_code: sessionStorage.getItem('selectedCompanyCode'),
+          Screen_Type,
+          Start_Year,
+          End_Year,
+          Start_No,
+          Running_No,
+          End_No,
+          comtext,
+          number_prefix,
+          status,
+          created_by: sessionStorage.getItem('selectedUserCode')
+        }),
+      });
+      if (response.ok) {
+        toast.success("Data inserted Successfully", {
+          onClose: () => clearInputFields()
+        });
+
+      } else if (response.status === 400) {
+        const errorResponse = await response.json();
+        console.error(errorResponse.message);
+        //setError(errorResponse.error);
+        toast.warning(errorResponse.message, {
+
+        });
+      } else {
+        console.error("Failed to insert data");
+        // Show generic error message using SweetAlert
+        toast.error('Failed to insert data', {
+
+        });
+      }
+    } catch (error) {
+      console.error("Error inserting data:", error);
+      // Show error message using SweetAlert
+      toast.error('Error inserting data: ' + error.message, {
+
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleNavigate = () => {
+    navigate("/NumberSeries"); // Pass selectedRows as props to the Input component
+  };
+
+
+
+  const handleKeyDown = async (e, nextFieldRef, value, hasValueChanged, setHasValueChanged) => {
+    if (e.key === 'Enter') {
+      // Check if the value has changed and handle the search logic
+      if (hasValueChanged) {
+        await handleKeyDownStatus(e); // Trigger the search function
+        setHasValueChanged(false); // Reset the flag after the search
+      }
+
+      // Move to the next field if the current field has a valid value
+      if (value) {
+        nextFieldRef.current.focus();
+      } else {
+        e.preventDefault(); // Prevent moving to the next field if the value is empty
+      }
+    }
+  };
+
+  const handleKeyDownStatus = async (e) => {
+    if (e.key === 'Enter' && hasValueChanged) { // Only trigger search if the value has changed
+      // Trigger the search function
+      setHasValueChanged(false); // Reset the flag after search
+    }
+  };
+
+  return (
+    <div class="container-fluid Topnav-screen ">
+      <div className="">
+        <div class="">
+          {loading && <LoadingScreen />}
+          <ToastContainer position="top-right" className="toast-design" theme="colored" />
+          <div className="shadow-lg p-1 bg-light rounded main-header-box">
+            <div className="header-flex">
+              <h1 className="page-title">{mode === "update" ? 'Update Number Series ' : 'Add Number Series'} </h1>
+              <div className="action-wrapper">
+                <div className="action-icon delete" onClick={handleNavigate}>
+                  <span className="tooltip">Close</span>
+                  <i className="fa-solid fa-xmark"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="shadow-lg p-3 bg-light rounded mt-2 container-form-box">
+            <div className="row g-3">
+
+              <div className="col-md-3">
+                <div
+                  className={`inputGroup selectGroup 
+      ${selectedscreentype ? "has-value" : ""} 
+      ${isSelectedscreentype ? "is-focused" : ""}`}
+                >
+                  <Select
+                    id="status"
+                    value={selectedscreentype}
+                    onChange={handleChangescreentype}
+                    options={filteredOptionscreentype}
+                    placeholder=" "
+                    onFocus={() => setIsSelectedscreentype(true)}
+                    onBlur={() => setIsSelectedscreentype(false)}
+                    classNamePrefix="react-select"
+                    isClearable
+                    ref={screentype}
+                    readOnly={mode === "update"}
+                    isDisabled={mode === "update"}
+                    onKeyDown={(e) => handleKeyDown(e, startyear, screentype)}
+                  />
+                  <label className={`floating-label ${error && !Screen_Type ? 'text-danger' : ''}`}>Screen Type<span className="text-danger">*</span></label>
+                </div>
+              </div>
+
+              <div className="col-md-3">
+                <div className="inputGroup">
+                  <input
+                    id="acc"
+                    class="exp-input-field form-control"
+                    type="date"
+                    placeholder=""
+                    required title="Please enter the start year"
+                    value={Start_Year}
+                    onChange={(e) => setStart_Year
+                      (e.target.value)}
+                    maxLength={9}
+                    // readOnly
+                    ref={startyear}
+                    onKeyDown={(e) => handleKeyDown(e, endyear, startyear)}
+                  />
+                  <label className={`exp-form-label ${error && !Start_Year ? 'text-danger' : ''}`}>Start Year<span className="text-danger">*</span></label>
+                </div>
+              </div>
+
+              <div className="col-md-3">
+                <div className="inputGroup">
+                  <input
+                    id="acc"
+                    class="exp-input-field form-control"
+                    type="date"
+                    placeholder=""
+                    required title="Please enter the end year"
+                    value={End_Year}
+                    onChange={(e) => setEnd_Year
+                      (e.target.value)}
+                    maxLength={9}
+                    // readOnly
+                    ref={endyear}
+                    onKeyDown={(e) => handleKeyDown(e, strtno, endyear)}
+                  />
+                  <label className={`exp-form-label ${error && !End_Year ? 'text-danger' : ''}`}>End Year<span className="text-danger">*</span></label>
+                </div>
+              </div>
+
+              <div className="col-md-3">
+                <div className="inputGroup">
+                  <input
+                    id="acc"
+                    class="exp-input-field form-control"
+                    type="number"
+                    placeholder=""
+                    required title="Please enter the start number"
+                    value={Start_No}
+                    onChange={(e) => setStart_No
+                      (e.target.value)}
+                    maxLength={9}
+                    ref={strtno}
+                    onKeyDown={(e) => handleKeyDown(e, runno, strtno)}
+                  />
+                  <label className={`exp-form-label ${error && !Start_No ? 'text-danger' : ''}`}>Start No<span className="text-danger">*</span></label>
+                </div>
+              </div>
+
+              <div className="col-md-3">
+                <div className="inputGroup">
+                  <input
+                    id="acc"
+                    class="exp-input-field form-control"
+                    type="number"
+                    placeholder=""
+                    required title="Please enter the running number"
+                    value={Running_No}
+                    onChange={(e) => setRunning_No
+                      (e.target.value)}
+                    maxLength={9}
+                    ref={runno}
+                    onKeyDown={(e) => handleKeyDown(e, endno, runno)}
+                  />
+                  <label className={`exp-form-label ${error && !Running_No ? 'text-danger' : ''}`}>Running No<span className="text-danger">*</span></label>
+                </div>
+              </div>
+
+              <div className="col-md-3">
+                <div className="inputGroup">
+                  <input
+                    id="acc"
+                    class="exp-input-field form-control"
+                    type="number"
+                    placeholder=""
+                    required title="Please enter the end number"
+                    value={End_No}
+                    onChange={(e) => setEnd_No
+                      (e.target.value)}
+                    maxLength={9}
+                    ref={endno}
+                    onKeyDown={(e) => handleKeyDown(e, text, endno)}
+                  />
+                  <label className={`exp-form-label ${error && !End_No ? 'text-danger' : ''}`}>End No <span className="text-danger">*</span></label>
+                </div>
+              </div>
+
+              <div className="col-md-3">
+                <div className="inputGroup">
+                  <input
+                    className="exp-input-field form-control"
+                    id='party_code'
+                    autoComplete="off"
+                    placeholder=" "
+                    value={comtext}
+                    onChange={(e) => secomtext
+                      (e.target.value)}
+                    type="text"
+                    ref={text}
+                    onKeyDown={(e) => handleKeyDown(e, Status, text)}
+                  />
+                  <label className={`exp-form-label ${error && !comtext ? 'text-danger' : ''}`}>Text <span className="text-danger">*</span></label>
+                </div>
+              </div>
+
+              <div className="col-md-3">
+                <div
+                  className={`inputGroup selectGroup 
+      ${selectedStatus ? "has-value" : ""} 
+      ${isSelectedStatus ? "is-focused" : ""}`}
+                >
+                  <Select
+                    id="status"
+                    value={selectedStatus}
+                    onChange={handleChangeStatus}
+                    options={filteredOptionStatus}
+                    placeholder=" "
+                    onFocus={() => setIsSelectStatus(true)}
+                    onBlur={() => setIsSelectStatus(false)}
+                    classNamePrefix="react-select"
+                    isClearable
+                    ref={Status}
+                    required title="Please select a status"
+                    onKeyDown={(e) => handleKeyDown(e, numpre, Status)}
+                  />
+                  <label className={`floating-label ${error && !selectedStatus ? 'text-danger' : ''}`}>Status<span className="text-danger">*</span></label>
+                </div>
+              </div>
+
+              <div className="col-md-3">
+                <div
+                  className={`inputGroup selectGroup 
+      ${selectedBoolean ? "has-value" : ""} 
+      ${isSelectedBoolean ? "is-focused" : ""}`}
+                >
+                  <Select
+                    id="numpref"
+                    value={selectedBoolean}
+                    onChange={handleChangeBoolean}
+                    options={filteredOptionBoolean}
+                    placeholder=" "
+                    onFocus={() => setIsSelectBoolean(true)}
+                    onBlur={() => setIsSelectBoolean(false)}
+                    classNamePrefix="react-select"
+                    isClearable
+                    required title="Please select a Number Prefix status"
+                    ref={numpre}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        if (mode === "create") {
+                          handleInsert();
+                        } else {
+                          handleUpdate();
+                        }
+                      }
+                    }}
+                  />
+                  <label className={`floating-label ${error && !selectedBoolean ? 'text-danger' : ''}`}>Number Prefix<span className="text-danger">*</span></label>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div className="search-btn-wrapper">
+                  {mode === "create" ? (
+                    <div className="icon-btn save" onClick={handleInsert}>
+                      <span className="tooltip">Save</span>
+                      <i class="fa-solid fa-floppy-disk"></i>
+                    </div>
+                  ) : (
+                    <div className="icon-btn update" onClick={handleUpdate}>
+                      <span className="tooltip">Update</span>
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  );
+}
+export default NumberSeriesInput;

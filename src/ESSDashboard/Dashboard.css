@@ -1,0 +1,1225 @@
+.dashboard-container-fluid {
+  width: 100%;
+  padding-right: var(--bs-gutter-x, 0.75rem);
+  padding-left: var(--bs-gutter-x, 0.75rem);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.app-shadow-lg {
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+}
+
+.shadow-none-custom {
+  box-shadow: none !important;
+}
+
+.bg-light-color {
+  background-color: #f8f9fa !important;
+}
+
+.text-color-white {
+  color: #fff !important;
+}
+
+.text-color-dark {
+  color: #212529 !important;
+}
+
+.text-muted-color {
+  color: #6c757d !important;
+}
+
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+
+.font-size-4 {
+  font-size: 2rem !important;
+}
+
+.font-size-6 {
+  font-size: 1rem !important;
+}
+
+.font-size-small {
+  font-size: 0.85rem;
+}
+
+.height-full {
+  height: 100%;
+}
+
+.display-flex {
+  display: flex !important;
+}
+
+.display-block-custom {
+  display: block !important;
+}
+
+.margin-x-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.text-align-center {
+  text-align: center !important;
+}
+
+.spacing-p-1 {
+  padding: 0.25rem !important;
+}
+
+.spacing-p-3 {
+  padding: 1rem !important;
+}
+
+.spacing-mt-1 {
+  margin-top: 0.25rem !important;
+}
+
+.spacing-mt-2 {
+  margin-top: 0.5rem !important;
+}
+
+.spacing-mt-3 {
+  margin-top: 1rem !important;
+}
+
+.spacing-mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.spacing-mb-1 {
+  margin-bottom: 0.25rem !important;
+}
+
+.spacing-me-2 {
+  margin-right: 0.5rem !important;
+}
+
+.spacing-me-3 {
+  margin-right: 1rem !important;
+}
+
+.spacing-pb-2 {
+  padding-bottom: 0.5rem !important;
+}
+
+.flex-gap-2 {
+  gap: 0.5rem !important;
+}
+
+.flex-between-center {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+.flex-end {
+  justify-content: flex-end !important;
+}
+
+.align-start {
+  align-items: flex-start !important;
+}
+
+.justify-center {
+  justify-content: center !important;
+}
+
+.flex-col {
+  flex-direction: column !important;
+}
+
+.rounded-base {
+  border-radius: 0.375rem !important;
+}
+
+.rounded-xl {
+  border-radius: 1rem !important;
+}
+
+.rounded-custom {
+  border-radius: 0.375rem !important;
+}
+
+.image-rounded-20 {
+  border-radius: 20px !important;
+}
+
+/* ===================================================== */
+/* 2. GRID SYSTEM (COLS)               */
+/* ===================================================== */
+.dashboard-row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(1 * var(--bs-gutter-y));
+  margin-right: calc(-0.5 * var(--bs-gutter-x));
+  margin-left: calc(-0.5 * var(--bs-gutter-x));
+}
+
+.dashboard-row>[class*="grid-col-"] {
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  margin-top: var(--bs-gutter-y);
+}
+
+.grid-col-12 {
+  width: 100%;
+}
+
+.grid-col-md-4 {
+  width: 33.333333%;
+}
+
+.grid-col-md-5 {
+  width: 15%;
+}
+
+/* Large devices (lg) */
+@media (min-width: 992px) {
+  .grid-col-lg-6 {
+    width: 50%;
+  }
+
+  .grid-col-lg-3 {
+    width: 25%;
+  }
+}
+
+/* Medium devices (md) */
+@media (min-width: 768px) {
+  .grid-col-md-8 {
+    width: 66.666667%;
+  }
+
+  .flex-md-row-custom {
+    flex-direction: row !important;
+  }
+
+  .align-md-center {
+    align-items: center !important;
+  }
+
+  .spacing-mt-md-0 {
+    margin-top: 0 !important;
+  }
+}
+
+/* Small devices (sm) */
+@media (min-width: 576px) {
+  .grid-col-sm-1 {
+    width: 8.333333%;
+  }
+}
+
+/* ===================================================== */
+/* 3. CUSTOM COMPONENTS                */
+/* ===================================================== */
+
+/* --- Ticker and Check-in Section --- */
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ticker-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.ticker-text {
+  white-space: nowrap;
+  font-weight: 600;
+  color: #010f4b;
+  animation: ticker 12s linear infinite;
+  padding-left: 100%;
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.dashboard-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.dashboard-wrapper .app-form-control {
+  width: 140px;
+  height: 34px;
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid #ccc;
+}
+
+.dashboard-wrapper .app-form-control:focus {
+  border-color: #4361ee !important;
+  box-shadow: none !important;
+}
+
+.check-btn {
+  border-radius: 6px;
+  padding: 5px 15px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Info Cards (Top Row) --- */
+.dashboard-layout {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 15px;
+}
+
+.info-card-base {
+  padding: 20px;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  height: 120px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.info-card-base:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-gradient-blue {
+  background: linear-gradient(135deg, #247aff, #004dff);
+}
+
+.card-gradient-pink {
+  background: linear-gradient(135deg, #ff007b, #a800ff);
+}
+
+.card-gradient-indigo {
+  background: linear-gradient(135deg, #4b0082, #6a00cd);
+}
+
+.card-pulse-image {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 100px;
+  height: 100%;
+  opacity: 0.3;
+  animation: pulse 4s infinite ease-in-out;
+  z-index: 1;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* --- Base Card Component (Used for Mid/Bottom Sections) --- */
+.app-card-base {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+  border: none;
+  border-radius: 1rem !important;
+  overflow: hidden;
+  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+  padding: 20px;
+  /* Add default padding */
+}
+
+.app-card-base:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15) !important;
+}
+
+.card-title-heading {
+  font-weight: 600;
+  color: #343a40;
+  font-size: 1.25rem;
+}
+
+/* --- Buttons --- */
+.app-btn {
+  border-radius: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.btn-outline-primary-custom {
+  border-color: #007bff;
+  color: #007bff;
+  transition: all 0.2s;
+  background-color: transparent;
+}
+
+.btn-outline-primary-custom:hover {
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* --- Attendance Card --- */
+.attendance-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.chart-area-container {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid #f8f9fa;
+}
+
+/* --- Leave Approvals Card --- */
+.leave-list-wrapper {
+  max-height: 465px;
+  overflow-y: auto;
+  background-color: #fff;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.leave-list-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.app-list-group {
+  padding: 0;
+}
+
+.leave-request-item {
+  border: 1px solid #e9ecef;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  padding: 15px;
+  transition: background-color 0.2s;
+  /* Default Mobile-First Stacking */
+  flex-direction: column !important; /* Ensure default is column */
+  align-items: flex-start !important;
+}
+
+.leave-request-item > div:first-child {
+    width: 100%; /* Ensure details take full width */
+}
+
+.leave-request-item:hover {
+  background-color: #f8f9fa;
+}
+
+.app-checkbox-input {
+  width: 1em;
+  height: 1em;
+  border: 1px solid #ced4da;
+  border-radius: 0.25em;
+  cursor: pointer;
+}
+
+.request-detail-badge-group {
+    /* Ensure badges wrap and have proper spacing */
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 5px;
+    margin-top: 5px; /* Add some space above badges on mobile */
+}
+
+.request-detail-badge-group span {
+  background-color: #f1f3f5;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+.action-icon-base {
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.action-icon-base:hover {
+  transform: scale(1.15);
+}
+
+.icon-approve {
+  color: #28a745;
+}
+
+.icon-reject {
+  color: #dc3545;
+  margin-left: 5px;
+}
+
+
+/* --- New Joinees Card (Carousel) --- */
+.joinees-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  max-height: 420px;
+  padding-bottom: 80px;
+}
+
+.joinee-profile-card {
+  padding: 10px 0;
+}
+
+.joinee-profile-card img {
+  border: 3px solid #007bff;
+  object-fit: cover;
+  width: 300px;
+  height: 250px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.app-badge {
+  padding: 0.35em 0.65em;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.rounded-pill-custom {
+  border-radius: 50rem !important;
+}
+
+.badge-info-color {
+  background-color: #0dcaf0 !important;
+  color: #000 !important;
+}
+
+/* Carousel Controls */
+.app-carousel {
+  position: relative;
+}
+
+.carousel-inner-custom {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-item-custom {
+  position: relative;
+  display: none;
+  float: left;
+  width: 100%;
+  margin-right: -100%;
+  backface-visibility: hidden;
+  transition: transform 0.6s ease-in-out;
+}
+
+.carousel-item-custom.active-state {
+  display: block;
+}
+
+.carousel-nav-container {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.carousel-control-prev-custom,
+.carousel-control-next-custom {
+  position: relative !important;
+  opacity: 1;
+  width: 20px;
+  height: 20px;
+  margin: 0 10px;
+  top: 0;
+  bottom: 0;
+  background: #f8f9fa;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  transition: background-color 0.2s;
+}
+
+/* --- Upcoming Birthdays Card --- */
+.birthday-card-wrapper {
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background-color: #fff;
+}
+
+.birthday-card-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.birthday-list-container {
+  padding: 10px 0;
+}
+
+.birthday-profile-item {
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.birthday-profile-item img {
+  border: 3px solid #ffc107;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(255, 193, 7, 0.3);
+}
+
+/* --- My Team Card --- */
+.birthday-card-wrapper {
+  background-color: #fff;
+}
+
+.team-select-wrapper {
+  width: 180px; 
+  min-width: 180px;
+  margin-right: 10px;
+}
+
+.team-toggle-button {
+  width: 50%;
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-weight: 500;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+  width: auto;
+  min-width: 100px; 
+}
+
+.team-toggle-button:hover {
+  background-color: #5a6268;
+}
+
+.request-action-icons {
+    /* Action icons default alignment (Mobile) */
+    width: 100%; /* Take full width on mobile for better touch target */
+    justify-content: flex-start !important; /* Align icons to the left/start on mobile */
+    margin-top: 10px !important; /* Space above icons when stacked on mobile */
+}
+
+/* --- AG Grid Theme --- */
+.app-grid-theme {
+  --ag-foreground-color: #495057;
+  --ag-header-background-color: #f8f9fa;
+  --ag-odd-row-background-color: #ffffff;
+  --ag-row-hover-color: #e9ecef;
+  border: none !important;
+  margin-top: 8px;
+}
+
+/* ===================================================== */
+/* 4. MEDIA QUERIES                    */
+/* ===================================================== */
+
+@media (min-width: 768px) {
+  .leave-request-item {
+    /* Override to row layout on tablet/desktop */
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important; /* Center vertically in row */
+  }
+
+  .leave-request-item > div:first-child {
+    /* Allow details to shrink slightly but maintain content integrity */
+    width: auto; 
+    flex-shrink: 1;
+    margin-bottom: 0 !important; /* Remove mobile margin */
+  }
+
+  .request-detail-badge-group {
+    margin-top: 0; /* Remove top margin when in row layout */
+  }
+
+  .request-action-icons {
+    /* Align action icons to the right/end on tablet/desktop */
+    width: auto; 
+    justify-content: flex-end !important;
+    margin-top: 0 !important; /* Remove mobile margin */
+  }
+}
+
+
+/* Mobile Landscape (= 768px) */
+@media (max-width: 768px) {
+  .dashboard-wrapper {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .dashboard-wrapper .app-form-control {
+    width: 120px;
+  }
+}
+
+/* Tablets and Below (= 991.98px) */
+@media (max-width: 991.98px) {
+
+  /* Stack columns and add spacing */
+  .dashboard-row>[class*="grid-col-"] {
+    margin-bottom: 20px;
+    width: 100%;
+    /* Override lg-6, lg-3 to full width */
+  }
+
+  /* Adjust My Team Card controls */
+  .grid-col-lg-6 .display-flex.flex-end {
+    /* flex-direction: column; */
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .grid-col-lg-6 .team-select-wrapper,
+  .grid-col-lg-6 .team-toggle-button {
+    width: 100% !important;
+    min-width: unset;
+    margin-right: 0 !important;
+  }
+
+  /* Leave request list adjustment */
+  .leave-request-item {
+    align-items: flex-start !important;
+  }
+
+  .request-action-icons {
+    width: 100%;
+    justify-content: flex-start !important;
+    margin-top: 10px !important;
+  }
+}
+
+/* Small Mobile (= 576px) */
+@media (max-width: 576px) {
+  .dashboard-wrapper {
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .check-btn {
+    text-align: center;
+    padding: 6px;
+  }
+
+  .info-card-base {
+    height: 100px;
+    padding: 15px;
+  }
+
+  .font-size-4 {
+    font-size: 1.8rem !important;
+  }
+}
+
+/* ===================================================== */
+/* 1. BASE UTILITIES AND GLOBAL STYLES (Foundation)      */
+/* (Existing Global Styles remain unchanged)          */
+/* ===================================================== */
+.custom-badge {
+  display: inline-block;
+  padding: 6px 14px;
+  background: #28a745; /* success green */
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 50px; /* pill shape */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  cursor: default;
+  user-select: none;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Hover effect */
+.custom-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+:root {
+  --color-cl: #007bff;
+  --color-sl: #28a745; 
+  --color-el: #ffc107; 
+  --color-other: #6c757d; 
+  --calendar-holiday: rgb(86, 219, 115);
+  --calendar-leave: rgb(252, 61, 61);
+  --calendar-today: #cce5ff;
+}
+
+.dashboard-card-base {
+  box-shadow: var(--shadow-lg);
+  border: none;
+  /* border-radius: var(--border-radius-xl) !important; */
+  overflow: hidden;
+  padding: 20px;
+  background-color: #fff;
+  height: 100%;
+}
+
+.info-card-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 calc(-0.5 * var(--bs-gutter-x));
+}
+
+.leave-balance-container {
+    padding: 0 calc(var(--bs-gutter-x) * 0.5);
+    /* margin-bottom: var(--bs-gutter-x); */
+    width: 100%;
+}
+
+.payslip-analysis-container {
+    padding: 0 calc(var(--bs-gutter-x) * 0.5);
+    /* margin-bottom: var(--bs-gutter-x); */
+    width: 100%;
+}
+
+.holiday-calendar-container {
+    padding: 0 calc(var(--bs-gutter-x) * 0.5);
+    /* margin-bottom: var(--bs-gutter-x); */
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .leave-balance-container { width: 50%; }
+    .payslip-analysis-container { width: 16.666667%; }
+    .holiday-calendar-container { width: 33.333333%; }
+}
+
+@media (min-width: 992px) {
+    .leave-balance-container { width: 50%; }
+    .payslip-analysis-container { width: 16.666667%; }
+    .holiday-calendar-container { width: 33.333333%; }
+}
+
+.leave-balance-card {
+    background: #fff;
+}
+
+.apply-leave-btn {
+    border: none !important;
+    background-color: #6c757d;
+    color: white;
+    font-size: 0.9rem !important;
+    padding: 5px 10px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: color 0.2s ease;
+    min-width: 100px; 
+    box-shadow: none;
+}
+
+.apply-leave-btn:hover {
+    color: #fff;
+    background-color: #5a6268;
+}
+
+.calender-btn {
+    border: none !important;
+    background-color: #6c757d;
+    color: white;
+    font-size: 0.9rem !important;
+    padding: 5px 10px;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: color 0.2s ease;
+    min-width: 100px; 
+    box-shadow: none;
+}
+
+.leave-data-grid-row {
+    margin-top: 10px; 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: -4px;
+}
+
+.leave-item-col {
+    padding: 2px;
+    width: 25%; 
+    flex-grow: 1; 
+}
+
+.leave-type-card {
+    text-align: center;
+    padding: 15px 5px;
+    border: 1px solid #e9ecef !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+    height: 100%;
+  }
+
+.leave-type-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.leave-type-card h6 {
+    margin: 0;
+    line-height: 1.2;
+}
+
+.leave-icon-base {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.leave-icon.CL { background-color: var(--color-cl); }
+.leave-icon.SL { background-color: var(--color-sl); }
+.leave-icon.EL { background-color: var(--color-el); }
+.leave-icon.PL { background-color: var(--color-info); }
+.leave-icon.OTHER { background-color: var(--color-other); }
+
+.payslip-analysis-card {
+    border-left: 5px solid var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.payslip-analysis-card .form-group {
+    width: 100%;
+}
+
+.payslip-analysis-card label {
+    font-size: 0.875rem;
+    color: var(--color-secondary);
+    margin-bottom: 5px;
+}
+
+.payslip-analysis-card input[type="month"] {
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.payslip-analysis-card .btn-primary {
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.payslip-analysis-card .btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+.alloted-holidays-card {
+    border-left: 5px solid var(--color-info);
+    padding: 20px;
+}
+
+.calendar-toggle-btn {
+    width: 30px;
+    height: 30px;
+    border: none !important;
+    background: none !important;
+    padding: 0 !important;
+    color: var(--color-secondary);
+    box-shadow: none;
+    transition: color 0.2s ease;
+}
+
+.calendar-toggle-btn:hover {
+    color: var(--color-primary);
+}
+
+.calendar-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.grid-template-columns-7 {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+    text-align: center;
+}
+
+.day-cell {
+    padding: 8px 4px;
+    background-color: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    min-height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.85rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    cursor: default;
+}
+
+.day-cell:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+    transform: none; 
+}
+
+.weekend-cell {
+    background-color: #ffe5e5;
+}
+
+.holiday-cell {
+    background-color: var(--calendar-holiday) !important;
+    color: #ffff;
+    font-weight: bold;
+}
+
+.leave-cell {
+    background-color: var(--calendar-leave) !important;
+    color: #ffff;
+    font-weight: bold;
+}
+
+.today-cell {
+    background-color: var(--calendar-today) !important;
+    font-weight: bold;
+    border: 2px solid var(--color-primary);
+    transform: scale(1.05); /* Highlight today */
+}
+
+
+/* ===================================================== */
+/* 4. MEDIA QUERIES (Responsive Logic)                   */
+/* ===================================================== */
+
+/* Small Mobile (= 576px) */
+@media (max-width: 576px) {
+    
+    .leave-balance-container,
+    .payslip-analysis-container,
+    .holiday-calendar-container {
+        width: 100% !important; 
+        margin-bottom: 15px;
+    }
+    
+    .leave-data-grid-row {
+        gap: 10px;
+    }
+    
+    .leave-item-col {
+        width: calc(50% - 10px); 
+        flex-grow: 0;
+    }
+
+    .payslip-analysis-card input[type="month"] {
+        width: 100%;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 767.98px) {
+
+    .leave-item-col {
+        width: 25%;
+        flex-grow: 1; 
+    }
+}
+
+/* ----------------------------------------------------
+   GLOBAL WRAPPER FOR TWO CHART PANELS
+---------------------------------------------------- */
+.charts-row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 10px;
+  flex-wrap: nowrap;
+}
+
+/* Each chart card box */
+.chart-box {
+  flex: 0 0 49.5%;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.chart-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 6px 15px rgba(0,0,0,0.15);
+}
+
+/* ----------------------------------------------------
+   HEADINGS
+---------------------------------------------------- */
+.chart-box h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* ----------------------------------------------------
+   SELECT DROPDOWNS (React Select)
+---------------------------------------------------- */
+.chart-select-group {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.chart-select-group .react-select__control {
+  border-radius: 8px !important;
+  border-color: #ced4da !important;
+  min-height: 38px;
+  font-size: 14px;
+}
+
+.chart-select-group .react-select__menu {
+  z-index: 9999 !important;
+}
+
+/* Fix for react-select full width issue */
+.chart-select-group .react-select-container {
+  width: 180px;
+}
+
+/* ----------------------------------------------------
+   CHART CONTAINER
+---------------------------------------------------- */
+.chart-container {
+  width: 100%;
+  height: 350px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+
+/* ----------------------------------------------------
+   MOBILE RESPONSIVE (IMPORTANT)
+---------------------------------------------------- */
+@media (max-width: 992px) {
+  .chart-box {
+    flex: 0 0 48%;
+    margin-bottom: 10px;
+  }
+
+  .chart-select-group .react-select-container {
+    width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* Stack vertically on mobile */
+  .charts-row {
+    flex-direction: column;
+  }
+
+  .chart-box {
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  .chart-select-group {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .chart-select-group .react-select-container {
+    width: 100%;
+  }
+
+  .chart-box h2 {
+    font-size: 1.1rem;
+  }
+
+  .chart-container {
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .chart-container {
+    height: 250px;
+  }
+
+  .chart-box {
+    padding: 15px;
+  }
+
+  .chart-select-group .react-select-container {
+    width: 100%;
+  }
+}

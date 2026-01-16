@@ -1,0 +1,298 @@
+:root {
+  /* 1. Base Colors (Navy Theme Default) */
+  --bg-color: #F4F7F9;        /* Main Content Background */
+  --font-color: #3C4858;      /* Default Text Color */
+  --font-hover: #FFFFFF;     /* Text color on hover/active backgrounds */
+  --border-color: #D4E2EC;   /* Primary border/input color */
+  --chart-bg: #FFFFFF;       /* Chart/Card/Modal Background */
+
+  /* 2. Sidebar/Primary/Header */
+  --sidenav-menu: #102A43;    /* Sidebar/Menu Background */
+  --sidenav-hover: #247BA0;   /* Sidebar Item Hover/Accent Background */
+  
+  /* 3. Button/Action Colors */
+  --but: #247BA0;             /* Primary Button Background/Accent Focus */
+  --but-border: #1A5F7D;      /* Primary Button Border */
+  --but-hover: #1F6A8B;       /* Button Hover Background/Secondary Focus */
+  
+  /* 4. AG-Grid Colors */
+  --ag-header: #102A43;       /* Grid Header Background */
+  --ag-h1: #102A43;           /* Main Heading Color */
+  --ag-row: #E8F0F5;          /* Grid Row (Even) Background */
+  --ag-col: #D4E2EC;          /* Grid Row (Odd) Background */
+  --ag-row-even-hover: #C1D5E0;
+  --ag-row-odd-hover: #C1D5E0;
+  
+  /* 5. Form/Input Colors */
+  --exp-input-field: #F4F7F9; /* Default background for input fields */
+}
+
+body {
+  background: var(--bg-color);
+  transition: background-color 0.9s ease, color 0.9s ease;
+}
+
+.input-bg {
+  background: var(--bg-color);
+}
+
+.ag-theme-alpine {
+  color: var(--font-color); /* Using font-color */
+  font-family: Arial, sans-serif;
+  width: 100%;
+  transition: background-color 0.8s ease, color 0.9s ease;
+}
+
+.ag-header-cell-resize::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  display: var(--ag-header-column-resize-handle-display);
+  width: var(--ag-header-column-resize-handle-width);
+  height: var(--ag-header-column-resize-handle-height);
+  top: calc(50% - var(--ag-header-column-resize-handle-height)* 0.5);
+}
+
+.ag-header-cell {
+  border-color: var(--ag-header);
+  background: var(--ag-header);
+  font-size: 14px;
+  /* color: var(--font-color); */
+  color: #fff;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 100px;
+  font-weight: normal;
+}
+
+.ag-header-group-cell {
+  background: var(--ag-header);
+  color: var(--font-hover); /* Changed from white to --font-hover */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.ag-header:hover {
+  background: var(--ag-header);
+  color: var(--font-color);
+}
+
+.ag-root-wrapper.ag-layout-normal {
+  margin-left: 1%;
+  margin-right: 1%;
+  height: 95%;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  margin-bottom: 0;
+  color: var(--font-color); /* Changed from rgb(0, 0, 0) to --font-color */
+}
+
+.ag-root-wrapper-body.ag-focus-managed.ag-layout-normal {
+  margin-bottom: 0px;
+  padding-top: 0px;
+  color: var(--font-color); /* Changed from rgb(0, 0, 0) to --font-color */
+}
+
+.ag-paging-panel {
+  background-color: var(--ag-header);
+  color: var(--font-hover); /* Changed from white to --font-hover */
+}
+
+.ag-label {
+  color: var(--font-hover); /* Changed from white to --font-hover */
+}
+
+.ag-ltr {
+  color: var(--font-color); /* Changed from rgb(0, 0, 0) to --font-color */
+}
+
+.ag-paging-row-summary-panel{ 
+  display: none;
+}
+
+.ag-paging-panel {
+  height: 27px !important; 
+}
+
+.ag-paging-page-summary-panel,
+.ag-paging-row-summary-panel,
+.ag-icon.ag-icon-first,
+.ag-icon.ag-icon-previous,
+.ag-icon.ag-icon-next,
+.ag-icon.ag-icon-last,
+.ag-icon.ag-icon-menu {
+  color: var(--font-hover); /* Changed from white to --font-hover */
+}
+
+h2 {
+  color: var(--ag-h1);
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.ag-header {
+  background-color: var(--ag-header);
+  height: 0px;
+  color: var(--font-hover); /* Changed from white to --font-hover */
+  transition: background-color 0.8s ease, color 0.8s ease;
+}
+
+.ag-row.ag-row-even {
+  background-color: var(--ag-row);
+  transition: background-color 0.8s ease, color 0.9s ease;
+}
+
+.ag-row.ag-row-even:hover {
+  background-color: var(--ag-row-even-hover);
+}
+
+.ag-row.ag-row-odd {
+  background-color: var(--ag-col);
+  /* Light Gray */
+  transition: background-color 0.8s ease, color 0.9s ease;
+}
+
+.ag-row.ag-row-odd:hover {
+  background-color: var(--ag-row-odd-hover)
+    /* Light Gray */
+}
+
+.ag-row-hover {
+  background-color: var(--ag-row-even-hover)
+}
+
+.input[class^=ag-]:not([type]),
+input[class^=ag-][type=text],
+input[class^=ag-][type=number],
+input[class^=ag-][type=tel],
+input[class^=ag-][type=date],
+input[class^=ag-][type=datetime-local],
+textarea[class^=ag-] {
+  font-size: 15px;
+  line-height: inherit;
+  color: rgb(0, 0, 0);
+  font-family: inherit;
+  border: var(--ag-borders-input) var(--ag-input-border-color);
+}
+
+h4 {
+  font-size: 18px;
+  margin-left: 50px;
+  color: var(--font-color); /* Changed from rgb(0, 0, 0) to --font-color */
+}
+
+/* Additional Styling */
+button {
+  background: var(--but);
+  color: var(--font-hover); /* Changed from white to --font-hover */
+  padding: 5px 20px;
+  border-radius: 10px;
+  /* Updated shadow color logic to use theme variable if available, otherwise default */
+  /* box-shadow: 0.5px 0.5px 5px 0px var(--but-border);  */
+  transition: 0.8s;
+  border-color: var(--but-border);
+  font-weight: 500;
+  font-family: poppins;
+  margin-left: 10px;
+  transition: background-color 0.8s ease, color 0.9s ease;
+}
+
+button:hover {
+  background-color: var(--but-hover);
+  color: var(--font-hover);
+  opacity: 0.7;
+  transition: 0.8s;
+  transform: scale3d(1.05);
+}
+
+
+/*purcahse screen css added by pavun code end */
+@media (sm) {
+  .ag-theme-alpine {
+    padding: 8rem 4rem;
+  }
+}
+
+p {
+  font-size: 14px;
+  /* padding-left: 35px; */
+  padding-left: 20px;
+  /* padding-top: 10px; */
+  /* font-weight: normal; */
+}
+
+/* code added by kathiravan arumugam*/
+/* remove for uincrement and decrement function for type number */
+/* Hide the increment and decrement buttons */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+
+/* 404 Screen design css */
+.mars {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  height: 27vmin;
+  background: url('https://assets.codepen.io/1538474/mars.svg') no-repeat bottom center;
+  background-size: cover;
+}
+
+.logo-404 {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 16vmin;
+  width: 30vmin;
+}
+
+.meteor {
+  position: absolute;
+  right: 2vmin;
+  top: 16vmin;
+}
+
+.subtitle {
+  color: var(--font-color); /* Changed from black to --font-color */
+  font-weight: 400;
+  text-align: center;
+  font-size: 3.5vmin;
+  margin-top: -1vmin;
+  margin-bottom: 9vmin;
+}
+
+.btn-back {
+  border: 1px solid var(--font-hover); /* Changed from white to --font-hover */
+  color: var(--font-hover); /* Changed from white to --font-hover */
+  height: 5vmin;
+  padding: 12px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.astronaut {
+  position: absolute;
+  top: 18vmin;
+  height: 30vmin;
+  animation: floating 3s infinite ease-in-out;
+}
+
+.spaceship {
+  position: absolute;
+  bottom: 15vmin;
+}
+
+.demo-editor img {
+  max-width: 150px !important;
+  height: 100px !important;
+}
