@@ -1,4 +1,4 @@
-name: IIS Auto Deploy OS
+name: IIS Auto Deploy
 on:
   push:
     branches:
@@ -7,15 +7,14 @@ jobs:
   deploy:
     runs-on: self-hosted
     steps:
-      - name: Checkout code
+      - name: Download code
         uses: actions/checkout@v4
-      # -------- FRONTEND --------
-      - name: Frontend install
-        run: |
-          npm install
+            
       - name: Frontend build
         run: |
+          npm install
           npm run build
+          
       - name: Copy frontend build to IIS
         run: |
           xcopy /E /Y /I build "C:\inetpub\wwwroot\OS\build"
@@ -24,6 +23,6 @@ jobs:
         run: |
           cd backend
           npm install
-      - name: Restart backend using PM2
+      - name: Restart backend
         run: |
           pm2 restart os-backend
