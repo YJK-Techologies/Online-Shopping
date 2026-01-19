@@ -352,7 +352,7 @@ function App() {
       
       <div align="center">
         <button onClick={saveEditedData}>
-          SAVE <i class="bi bi-save2"></i>
+          SAVE Save<i class="bi bi-save2"></i>
         </button>
       </div>
     </div>
