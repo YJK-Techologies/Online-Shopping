@@ -30,7 +30,7 @@ jobs:
       - name: Sync backend code to IIS
         shell: powershell
         run: |
-          $src = "$env:GITHUB_WORKSPACE\server"
+          $src = "$env:GITHUB_WORKSPACE\backend"
           $dest = "C:\inetpub\wwwroot\OS\server"
 
           if (!(Test-Path $src)) {
