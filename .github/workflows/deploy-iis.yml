@@ -11,13 +11,13 @@ jobs:
 
     steps:
       # -------------------------------------------------
-      # 1️⃣ Checkout source code
+      # 1️⃣ Checkout source
       # -------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
       # -------------------------------------------------
-      # 2️⃣ Setup Node.js
+      # 2️⃣ Setup Node
       # -------------------------------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -25,12 +25,20 @@ jobs:
           node-version: 20
 
       # -------------------------------------------------
-      # 3️⃣ Sync BACKEND code to IIS (controller/routes/etc)
+      # 3️⃣ Sync BACKEND code to IIS (FIXED PATH)
       # -------------------------------------------------
       - name: Sync backend code to IIS
         shell: powershell
         run: |
-          robocopy server C:\inetpub\wwwroot\OS\server /MIR /XD node_modules
+          $src = "$env:GITHUB_WORKSPACE\server"
+          $dest = "C:\inetpub\wwwroot\OS\server"
+
+          if (!(Test-Path $src)) {
+            Write-Error "Backend source folder not found: $src"
+            exit 1
+          }
+
+          robocopy $src $dest /MIR /XD node_modules
           if ($LASTEXITCODE -le 7) {
             exit 0
           } else {
@@ -38,15 +46,15 @@ jobs:
           }
 
       # -------------------------------------------------
-      # 4️⃣ Install backend dependencies
+      # 4️⃣ Backend npm install
       # -------------------------------------------------
-      - name: Install backend packages
+      - name: Install backend dependencies
         shell: powershell
         run: |
           npm install --legacy-peer-deps --prefix C:\inetpub\wwwroot\OS\server
 
       # -------------------------------------------------
-      # 5️⃣ Restart backend using PM2
+      # 5️⃣ Restart backend via PM2
       # -------------------------------------------------
       - name: Restart backend
         shell: powershell
@@ -59,15 +67,15 @@ jobs:
           pm2 save
 
       # -------------------------------------------------
-      # 6️⃣ Install frontend dependencies
+      # 6️⃣ Frontend npm install
       # -------------------------------------------------
-      - name: Install frontend packages
+      - name: Install frontend dependencies
         shell: powershell
         run: |
           npm install --legacy-peer-deps
 
       # -------------------------------------------------
-      # 7️⃣ Build frontend (CI-safe)
+      # 7️⃣ Build frontend (CI safe)
       # -------------------------------------------------
       - name: Build frontend
         shell: powershell
