@@ -1,28 +1,44 @@
-name: IIS Auto Deploy
+name: OS Auto Deploy (IIS + PM2)
+
 on:
   push:
     branches:
       - main
+
 jobs:
   deploy:
     runs-on: self-hosted
+
     steps:
-      - name: Download code
+      # 1. Get latest code
+      - name: Checkout repository
         uses: actions/checkout@v4
-            
-      - name: Frontend build
+
+      # 2. Use Node.js
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3. Backend dependencies
+      - name: Install backend packages
+        run: |
+          cd server
+          npm install
+
+      # 4. Restart backend with PM2
+      - name: Restart backend
+        run: |
+          pm2 restart os-backend || pm2 start server/server.js --name os-backend
+          pm2 save
+
+      # 5. Frontend build (NO frontend folder)
+      - name: Build frontend
         run: |
           npm install
           npm run build
-          
-      - name: Copy frontend build to IIS
+
+      # 6. Copy build to IIS folder
+      - name: Deploy to IIS
         run: |
-          xcopy /E /Y /I build "C:\inetpub\wwwroot\OS\build"
-      # -------- BACKEND --------
-      - name: Backend install
-        run: |
-          cd backend
-          npm install
-      - name: Restart backend
-        run: |
-          pm2 restart os-backend
+          robocopy build C:\inetpub\wwwroot\OS\build /MIR
